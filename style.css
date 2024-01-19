@@ -40,6 +40,15 @@
     animation: bounce 0.5s linear;
 }
 
+.fa-heart {
+    cursor: pointer;
+}
+
+.fa-heart.bookmarked {
+    color: red;
+    font-weight: 600;
+}
+
 .title {
     text-transform: uppercase;
     font-size: 54px;
@@ -77,15 +86,6 @@ form{
     gap: 3rem;
 }
 
-.container-fav {
-    display: flex;
-    justify-content: center;
-    position: fixed;
-    top: 0;
-    right: 0;
-    width: 200px;
-    background-color: rgb(189, 184, 179);
-}
 
 .type-container {
     display: flex;
@@ -104,9 +104,11 @@ form{
 }
 
 header{
-    background-color: rgb(207, 202, 199);
+    background-color: rgb(223, 221, 221);
     padding-block: 1rem;
     box-shadow: 0 0 2rem 0 rgba(0, 0, 0, 0.5);
+    background-image: url(./assets/header.jpg);
+    background-size: 47%;
 }
 
 main {
@@ -116,7 +118,7 @@ main {
 }
 
 body {
-    background-color: rgb(192, 185, 181);
+    background-color: rgb(230, 225, 222);
     margin: 0;
     font-family: rubik;
     color: white;
@@ -137,6 +139,7 @@ ul {
     color: #222;
     text-align: center;
     border-radius: 5vmax;
+    border: 2px solid black;
 }
 .card-title {
     text-transform: uppercase;
@@ -152,6 +155,67 @@ ul {
 }
 .card-image {
     height: 120px;
+}
+
+.container-fav {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 250px;
+    
+}
+
+.fav-tittle {
+    font-size: 20px;
+    font-weight: 600;
+    text-transform: uppercase;
+    background-color: rgb(75, 71, 71);
+    border-radius: 1vmax;
+    padding: 10px;
+    text-align: center;
+    
+}
+
+.ul-fav {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.fav-name {
+    background-color: rgb(187,138,76);
+    border-radius: 500vmax;
+    border: 0.5px solid black;
+}
+
+.card-fav-container{
+    min-width: 110px;
+    max-width: 110px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 5px 5px 0 rgb(112, 108, 108);
+    border: 2px solid black;
+    list-style: none;
+    padding: 20px;
+    background-color: #f4f4f4;
+    color: #ffffff;
+    text-align: center;
+    border-radius: 1vmax;
+    margin-right: 20px;
+    text-transform: uppercase;
+    font-weight: 900;
+    background-image: url(./assets/paisaje.jpg);
+    background-size: 165%;
+    
+}
+
+.fav-image{
+    height: 100px;
+    min-width: 100px;
 }
 .p-id{
     font-weight: lighter;

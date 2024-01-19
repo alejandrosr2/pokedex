@@ -3,25 +3,27 @@ const btnTypes = document.querySelectorAll(".btn-nav");
 const inputSearch = document.querySelector(".searchPokemon");
 const btnSearch = document.querySelector(".btnSearch")
 const divFav = document.querySelector(".container-fav")
+const ulFavourite = document.querySelector("#favourites");
 
 let baseUrl = "https://pokeapi.co/api/v2/pokemon/";
 const maxPokemons = 150;
 
-favouriteList = [];
-
+let pokemonList = [];
+let pokemonFav = {};
 
 function getDataFromApi(){
     for (let i = 1; i<= maxPokemons; i++){
         const url = `${baseUrl}${i}`;
         fetch(url)
             .then(response => response.json())
-            .then(data => renderPokemon(data))
+            .then(data => {
+                renderPokemon(data);
+                pokemonList.push(data);
+            });
     };
-
-}
+};
 
 function renderPokemon(pokemon) {
-    console.log(pokemon)
     let types = pokemon.types.map((type) => `<p class="${type.type.name} type">${type.type.name}</p>`);
     types = types.join("  ");
     
@@ -43,7 +45,7 @@ function renderPokemon(pokemon) {
         </div>
         <div class="container-id-fav">
             <p class="p-id">#${pokeId}</p>
-            <p class="fav"><i class="fa-regular fa-heart"></i></p>
+            <p class="fav" onclick="handleClickBookMark(${pokemon.id})"><i id="heart-${pokemon.id}" class="fa-regular fa-heart"></i></p>
         </div>
     `;
 };
@@ -98,8 +100,30 @@ const handleClickSearch = async (event) => {
     
 };
 
+const handleClickBookMark = (pokemonId) => {
+    const pokemon = pokemonList.find(({id}) => id === pokemonId);
+    const heart = document.querySelector(`#heart-${pokemon.id}`)
+    if (pokemonFav[pokemonId]) {
+        pokemonFav[pokemonId].remove();
+        heart.classList.remove("bookmarked");
+        pokemonFav[pokemonId] = null;
+        return
+    }
+    
+    const li = document.createElement("li");
+    li.classList.add("card-fav-container");
+    pokemonFav[pokemonId] = li;
+    li.innerHTML = `
+    <img class="fav-image" src="${pokemon.sprites.other.showdown.front_default}"/>
+    <p class="fav-name">${pokemon.name}</p>
+    
+    `
+    ulFavourite.appendChild(li);
+    
+    heart.classList.add("bookmarked");
+};
 
-btnSearch.addEventListener("click", handleClickSearch)
+btnSearch.addEventListener("click", handleClickSearch);
 
 btnTypes.forEach(button => button.addEventListener("click", handleClickBtnType));
 
